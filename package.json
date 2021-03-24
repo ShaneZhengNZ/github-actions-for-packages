@@ -1,5 +1,5 @@
 {
-  "name": "actions-template",
+  "name": "@shanezhengnz/actions-template",
   "version": "1.0.0",
   "description": "Learn how to use GitHub Actions!",
   "main": "index.js",
@@ -11,6 +11,10 @@
     "build": "npx webpack --config ./src/webpack.config.js --mode production",
     "dev": "npx webpack --config ./src/webpack.config.js --mode development --watch",
     "test": "npx standard && npx jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ShaneZhengNZ/github-actions-for-packages.git"
   },
   "author": "githubtraining",
   "license": "MIT",
