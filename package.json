@@ -12,6 +12,10 @@
     "dev": "npx webpack --config ./src/webpack.config.js --mode development --watch",
     "test": "npx standard && npx jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ShaneZhengNZ/github-actions-for-packages.git"
+  },
   "author": "githubtraining",
   "license": "MIT",
   "standard": {
