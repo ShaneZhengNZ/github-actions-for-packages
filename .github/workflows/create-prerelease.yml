@@ -10,15 +10,6 @@ jobs:
     if: startsWith(github.ref, 'refs/heads/release/pre-')
     runs-on: ubuntu-latest
     steps:
-      - name: Check something
-        run: |
-          echo ${{github.ref}}
-      - name: print
-        run: |
-          echo ${{env.RELEASE_VERSION}}
-          echo ${GITHUB_REF}
-        env:
-          RELEASE_VERSION: ${GITHUB_REF##*release/pre-}+0
       - uses: actions/checkout@v1
       - name: Configure Git
         run: |
@@ -40,39 +31,15 @@ jobs:
     if: startsWith(github.ref, 'refs/heads/release/') && !startsWith(github.ref, 'refs/heads/release/pre-')
     runs-on: ubuntu-latest
     steps:
-      - name: Check something
-        run: |
-          echo ${{github.ref}}
-      - name: print
-        run: |
-          echo ${{env.RELEASE_VERSION}}
-          echo ${GITHUB_REF}
-          echo ${GITHUB_REF}+0
-        env:
-          RELEASE_VERSION: ${GITHUB_REF##*release/}+0
       - uses: actions/checkout@v1
-      - name: Commit files
+      - name: Configure Git
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-      - name: 'change version'
-        uses: reedyuk/npm-version@1.0.2
-        with:
-          version: ${{env.RELEASE_VERSION}}
-          # package: 'subproject-directory/'
-      # - name: update version
-      #   run: npm version $RELEASE_VERSION
+      - name: update version
+        run: npm version ${{env.RELEASE_VERSION}}
         env:
-          RELEASE_VERSION: ${GITHUB_REF##*release/}+0
-      - name: status
-        run: git status
-      - name: commit
-        run: |
-          git add .
-          git commit -m "${{env.RELEASE_VERSION}}"
-          git tag ${{env.RELEASE_VERSION}}
-        env:
-          RELEASE_VERSION: ${GITHUB_REF##*release/}+0
+          RELEASE_VERSION: ${GITHUB_REF##*release/}
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
@@ -80,6 +47,31 @@ jobs:
           branch: ${{ github.ref }}
           force: true
           tags: true
+      # - name: 'change version'
+      #   uses: reedyuk/npm-version@1.0.2
+      #   with:
+      #     version: ${{env.RELEASE_VERSION}}
+          # package: 'subproject-directory/'
+      # - name: update version
+      #   run: npm version $RELEASE_VERSION
+      #   env:
+      #     RELEASE_VERSION: ${GITHUB_REF##*release/}+0
+      # - name: status
+      #   run: git status
+      # - name: commit
+      #   run: |
+      #     git add .
+      #     git commit -m "${{env.RELEASE_VERSION}}"
+      #     git tag ${{env.RELEASE_VERSION}}
+      #   env:
+      #     RELEASE_VERSION: ${GITHUB_REF##*release/}+0
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }}
+      #     force: true
+      #     tags: true
       # - name: Push changes
       #   uses: ad-m/github-push-action@master
       #   with:
