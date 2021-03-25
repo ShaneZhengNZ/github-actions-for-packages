@@ -3,14 +3,17 @@ name: create hotfix
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
   build:
-    if: startsWith(github.ref, 'refs/heads/hotfix/')
+    # if: startsWith(github.ref, 'refs/heads/hotfix/')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: print
+        run: |
+          echo ${{github.ref}}
       # - name: Configure Git
       #   run: |
       #     git config --local user.email "github-actions[bot]@users.noreply.github.com"
