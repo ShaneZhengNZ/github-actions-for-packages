@@ -8,26 +8,26 @@ on:
 jobs:
   build-pre-release:
     runs-on: ubuntu-latest
-    if: startsWith(GITHUB_REF, 'refs/heads/release/pre-')
+    if: startsWith(github.ref, 'refs/heads/release/pre-')
     steps:
       - name: Check something
         run: |
-          echo ${GITHUB_REF}
-          echo "${GITHUB_REF}"
-          echo "${GITHUB_REF##*release/pre-}"
+          echo ${github.ref}
+          echo "${github.ref}"
+          echo "${github.ref##*release/pre-}"
       # - uses: actions/checkout@v1
       # - name: update version
       #   run: npm version ${{env.RELEASE_VERSION}}
   
   build-release:
     runs-on: ubuntu-latest
-    if: startsWith(GITHUB_REF, 'refs/heads/release/')
+    if: startsWith(github.ref, 'refs/heads/release/')
     steps:
       - name: Check something
         run: |
-          echo ${GITHUB_REF}
-          echo "${GITHUB_REF}"
-          echo "${GITHUB_REF##*release/}"
+          echo ${github.ref}
+          echo "${github.ref}"
+          echo "${github.ref##*release/}"
       # - uses: actions/checkout@v1
       # - name: update version
       #   run: npm version ${{env.RELEASE_VERSION}}
