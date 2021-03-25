@@ -1,29 +1,36 @@
 # This file wont do us much good in this location, make sure you change the path as directed to continue!
 
-name: create pre release
+name: create release
 
 on:
-  create:
-    branches:
-      - 'prerelease/[0-9]+.[0-9]+.[0-9]+'
-
-env:
-  RELEASE_VERSION: ${GITHUB_REF##*prerelease/}+0
+  create
 
 jobs:
-  build:
+  build-pre-release:
     runs-on: ubuntu-latest
-
+    if: startsWith(GITHUB_REF, 'refs/heads/release/pre-')
     steps:
-      # - name: Check something
-      #   run: |
-      #     echo ${GITHUB_REF}
-      #     echo "${GITHUB_REF}"
-      #     echo "${GITHUB_REF##*release/}"
-      #     echo "${GITHUB_REF##*release}"
-      - uses: actions/checkout@v1
-      - name: update version
-        run: npm version ${{env.RELEASE_VERSION}}
+      - name: Check something
+        run: |
+          echo ${GITHUB_REF}
+          echo "${GITHUB_REF}"
+          echo "${GITHUB_REF##*release/pre-}"
+      # - uses: actions/checkout@v1
+      # - name: update version
+      #   run: npm version ${{env.RELEASE_VERSION}}
+  
+  build-release:
+    runs-on: ubuntu-latest
+    if: startsWith(GITHUB_REF, 'refs/heads/release/')
+    steps:
+      - name: Check something
+        run: |
+          echo ${GITHUB_REF}
+          echo "${GITHUB_REF}"
+          echo "${GITHUB_REF##*release/}"
+      # - uses: actions/checkout@v1
+      # - name: update version
+      #   run: npm version ${{env.RELEASE_VERSION}}
       # - name: npm install and build webpack
       #   run: |
       #     npm install
