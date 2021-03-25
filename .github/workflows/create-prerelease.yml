@@ -25,7 +25,7 @@ jobs:
       #   run: npm version ${{env.RELEASE_VERSION}}
   
   build-release:
-    if: startsWith('refs/heads/release/', github.ref) && !startsWith(github.ref, 'refs/heads/release/pre-')
+    if: startsWith(github.ref, 'refs/heads/release/') && !startsWith(github.ref, 'refs/heads/release/pre-')
     runs-on: ubuntu-latest
     steps:
       - name: Check something
@@ -35,6 +35,7 @@ jobs:
         run: |
           echo ${{env.RELEASE_VERSION}}
           echo ${GITHUB_REF}
+          echo ${GITHUB_REF}+0
         env:
           RELEASE_VERSION: ${GITHUB_REF##*release/}
       # - uses: actions/checkout@v1
