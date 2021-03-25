@@ -7,27 +7,31 @@ on:
 
 jobs:
   build-pre-release:
-    runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/heads/release/pre-')
+    runs-on: ubuntu-latest
     steps:
       - name: Check something
         run: |
-          echo github.ref
-          echo "github.ref"
-          echo "${github.ref##*release/pre-}"
+          echo ${{github.ref}}
+      - name: print
+        run: |
+          echo env.RELEASE_VERSION
+        env:
+          RELEASE_VERSION: ${GITHUB_REF##*release/pre-}
       # - uses: actions/checkout@v1
       # - name: update version
       #   run: npm version ${{env.RELEASE_VERSION}}
   
   build-release:
+    if: startsWith('refs/heads/release/', github.ref) && !startsWith(github.ref, 'refs/heads/release/pre-')
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/heads/release/')
     steps:
       - name: Check something
         run: |
-          echo github.ref
-          echo "github.ref"
-          echo "${github.ref##*release/}"
+          echo ${{github.ref}}
+      - name: print
+        env:
+          RELEASE_VERSION: ${GITHUB_REF##*release/}
       # - uses: actions/checkout@v1
       # - name: update version
       #   run: npm version ${{env.RELEASE_VERSION}}
