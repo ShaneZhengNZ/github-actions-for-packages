@@ -21,6 +21,10 @@ export default class Game {
     return this.rowWin() || this.colWin() || this.diagWin()
   }
 
+  hasAnotherWinner () {
+    return this.rowWin() || this.colWin() || this.diagWin()
+  }
+
   rowWin () {
     let win = false
     for (let r = 0; r < 3; r++) {
