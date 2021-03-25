@@ -42,7 +42,7 @@ jobs:
       - name: 'change version'
         uses: reedyuk/npm-version@1.0.2
         with:
-          version: $RELEASE_VERSION
+          version: ${{env.RELEASE_VERSION}}
           # package: 'subproject-directory/'
       # - name: update version
       #   run: npm version $RELEASE_VERSION
