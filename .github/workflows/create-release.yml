@@ -1,0 +1,26 @@
+# This file wont do us much good in this location, make sure you change the path as directed to continue!
+
+name: Docker CD
+
+on:
+  create:
+    branches:
+      - 'release/[0-9]+.[0-9]+.[0-9]+'
+
+env:
+  RELEASE_VERSION: ${GITHUB_REF##*release/}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # - name: Check something
+      #   run: |
+      #     echo ${GITHUB_REF}
+      #     echo "${GITHUB_REF}"
+      #     echo "${GITHUB_REF##*release/}"
+      #     echo "${GITHUB_REF##*release}"
+      - uses: actions/checkout@v1
+      - name: update version
+        run: npm version ${{env.RELEASE_VERSION}}

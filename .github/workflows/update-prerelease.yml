@@ -3,23 +3,29 @@
 name: Docker CD
 
 on:
-  push:
+  pull_request:
     branches:
-      - 'release/**'
-      - 'hotfix/**'
+      - 'release/pre-[0-9]+.[0-9]+.[0-9]+'
+    types:
+      - closed
+
+env:
+  RELEASE_VERSION: ${GITHUB_REF##*release/}
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check something
-        run: |
-          echo ${GITHUB_REF}
-          echo "${GITHUB_REF}"
-          echo "${GITHUB_REF##*release/}"
-          echo "${GITHUB_REF##*release}"
-      # - uses: actions/checkout@v1
+      # - name: Check something
+      #   run: |
+      #     echo ${GITHUB_REF}
+      #     echo "${GITHUB_REF}"
+      #     echo "${GITHUB_REF##*release/}"
+      #     echo "${GITHUB_REF##*release}"
+      - uses: actions/checkout@v1
+      - name: update version
+        run: npm version prerelease
       # - name: npm install and build webpack
       #   run: |
       #     npm install
