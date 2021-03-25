@@ -9,9 +9,6 @@ on:
     types:
       - closed
 
-env:
-  RELEASE_VERSION: ${GITHUB_REF##*release/pre-}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,8 +21,19 @@ jobs:
       #     echo "${GITHUB_REF##*release/}"
       #     echo "${GITHUB_REF##*release}"
       - uses: actions/checkout@v1
+      - name: Configure Git
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
       - name: update version
         run: npm version prerelease
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          force: true
+          tags: true
       # - name: npm install and build webpack
       #   run: |
       #     npm install
