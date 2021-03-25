@@ -3,7 +3,7 @@
 name: create release
 
 on:
-  create
+  push
 
 jobs:
   build-pre-release:
