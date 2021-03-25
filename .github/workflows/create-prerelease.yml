@@ -17,12 +17,13 @@ jobs:
         run: |
           echo ${{env.RELEASE_VERSION}}
           echo ${GITHUB_REF}
-          echo ${GITHUB_REF}+0
         env:
-          RELEASE_VERSION: ${GITHUB_REF##*release/pre-}
-      # - uses: actions/checkout@v1
-      # - name: update version
-      #   run: npm version ${{env.RELEASE_VERSION}}
+          RELEASE_VERSION: ${GITHUB_REF##*release/pre-}+0
+      - uses: actions/checkout@v1
+      - name: update version
+        run: npm version ${{env.RELEASE_VERSION}}
+        env:
+          RELEASE_VERSION: ${GITHUB_REF##*release/pre-}+0
   
   build-release:
     if: startsWith(github.ref, 'refs/heads/release/') && !startsWith(github.ref, 'refs/heads/release/pre-')
