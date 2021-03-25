@@ -5,10 +5,10 @@ name: create pre release
 on:
   create:
     branches:
-      - 'release/pre-[0-9]+.[0-9]+.[0-9]+'
+      - 'prerelease/[0-9]+.[0-9]+.[0-9]+'
 
 env:
-  RELEASE_VERSION: ${GITHUB_REF##*release/pre-}+0
+  RELEASE_VERSION: ${GITHUB_REF##*prerelease/}+0
 
 jobs:
   build:
