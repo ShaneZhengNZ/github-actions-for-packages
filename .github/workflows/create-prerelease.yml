@@ -57,7 +57,7 @@ jobs:
       - name: commit
         run: |
           git add .
-          git commit -m "1.2.0 test"
+          git commit -m "${{env.RELEASE_VERSION}}"
           git tag ${{env.RELEASE_VERSION}}
         env:
           RELEASE_VERSION: ${GITHUB_REF##*release/}+0
