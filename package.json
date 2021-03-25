@@ -1,6 +1,6 @@
 {
   "name": "@shanezhengnz/actions-template",
-  "version": "4.0.0-0",
+  "version": "4.0.0",
   "description": "Learn how to use GitHub Actions!",
   "main": "index.js",
   "directories": {
