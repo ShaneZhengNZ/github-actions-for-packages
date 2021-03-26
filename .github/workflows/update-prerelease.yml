@@ -25,15 +25,17 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-      - name: update version
-        run: npm version prerelease
+      - name: update version without commit/tag
+        run: npm version prerelease --no-git-tag-version
+      - name: commit version change
+        run: git commit -m "update version"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
           force: true
-          tags: true
+          tags: false
       # - name: npm install and build webpack
       #   run: |
       #     npm install
