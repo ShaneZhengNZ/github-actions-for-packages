@@ -8,7 +8,7 @@ export default class Game {
       [null, null, null]
     ]
     this.player = Math.random() < 0.5 ? this.p1 : this.p2
-    this.sym = 'X'
+    this.sym = 'X';
   }
 
   turn(row, col) {
