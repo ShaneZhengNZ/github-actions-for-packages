@@ -22,7 +22,7 @@ export default class Game {
   }
 
   hasAnotherWinner () {
-    return this.rowWin() || this.colWin() || this.diagWin()
+    return this.rowWin() || this.colWin();
   }
 
   rowWin () {
