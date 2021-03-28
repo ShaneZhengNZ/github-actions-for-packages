@@ -28,7 +28,9 @@ jobs:
       - name: update version without commit/tag
         run: npm version prerelease --no-git-tag-version
       - name: commit version change
-        run: git commit -m "update version"
+        run: |
+          git add .
+          git commit -m "update version"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
