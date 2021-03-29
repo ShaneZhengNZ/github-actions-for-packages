@@ -31,7 +31,7 @@ jobs:
         working-directory: dist/
       - uses: JS-DevTools/npm-publish@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_TOKEN }}
           registry: https://npm.pkg.github.com
           access: "restricted"
           package: "./dist/package.json"
