@@ -1,9 +1,6 @@
 name: build and test
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches: [main, release/*, feature/*, hotfix/*]
     types: [review_requested, ready_for_review]
