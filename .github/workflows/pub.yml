@@ -3,7 +3,7 @@ name: pub test
 on:
   pull_request:
     branches:
-      - 'main'
+      - "main"
     types:
       - closed
 
@@ -15,7 +15,7 @@ jobs:
       - name: use Node.js v14
         uses: actions/setup-node@v1
         with:
-          node-version: '14'
+          node-version: "14"
       - name: configure git
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -38,7 +38,7 @@ jobs:
       - name: Push version update
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_TOKEN }}
           branch: ${{ github.ref }}
           force: true
           tags: false
